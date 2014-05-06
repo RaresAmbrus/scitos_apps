@@ -24,6 +24,7 @@ bool last_buttons[4] = {0,0,0,0};
 void controlCallback(const sensor_msgs::Joy::ConstPtr& msg)
 {
   //Check for X mode
+/*
   if(msg->axes.size() != 8) {
     if(!sent_error) {
       ROS_ERROR("Rumblepad is running in D mode. Please switch to X mode.");
@@ -32,6 +33,7 @@ void controlCallback(const sensor_msgs::Joy::ConstPtr& msg)
     }
     return;
   }
+*/
   sent_error = false;
 
   //Publish action buttons
