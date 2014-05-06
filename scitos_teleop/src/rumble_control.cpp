@@ -21,16 +21,18 @@ bool last_buttons[4] = {0,0,0,0};
 //Main callback handling the incomming joy_node messages
 void controlCallback(const sensor_msgs::Joy::ConstPtr& msg)
 {
-    //Check for X mode
-    if(msg->axes.size() != 8) {
-        if(!sent_error) {
-            ROS_ERROR("Rumblepad is running in D mode. Please switch to X mode.");
-            ROS_ERROR("Pad will not work as long as it runs in the wrong mode.");
-            sent_error = true;
-        }
-        return;
+  //Check for X mode
+/*
+  if(msg->axes.size() != 8) {
+    if(!sent_error) {
+      ROS_ERROR("Rumblepad is running in D mode. Please switch to X mode.");
+      ROS_ERROR("Pad will not work as long as it runs in the wrong mode.");
+      sent_error = true;
     }
-    sent_error = false;
+    return;
+  }
+*/
+  sent_error = false;
 
     //Publish action buttons
     scitos_apps_msgs::action_buttons button_msg;
