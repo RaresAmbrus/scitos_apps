@@ -11,8 +11,8 @@ int main(int argc, char** argv)
   client.waitForServer();
   scitos_ptu::PanTiltGoal goal;
   // Fill in goal here
-  goal.pan_start= -100;
-  goal.pan_end= 100;
+  goal.pan_start= -150;
+  goal.pan_end= 151;
   goal.pan_step= 50;
   goal.tilt_start= -30;
   goal.tilt_step= 20;
