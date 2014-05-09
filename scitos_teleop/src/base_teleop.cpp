@@ -34,22 +34,32 @@ void controlCallback(const sensor_msgs::Joy::ConstPtr& msg)
      return;
    }
 
+   double pan_neg = -150 * (M_PI/180);
+   double pan_pos = 150 * (M_PI/180);
+   double tilt_neg = -30 * (M_PI/180);
+   double tilt_pos = 30 * (M_PI/180);
+
    count=0;
    if (msg->axes[2] < 0) 
    { 
 	newptuState.position[0] = ptuState.position[0] - M_PI/36.0;
+	if (newptuState.position[0] < pan_neg) newptuState.position[0] = pan_neg;
    } else if (msg->axes[2]>0)
    {
 	newptuState.position[0] = ptuState.position[0] + M_PI/36.0;
+	if (newptuState.position[0] > pan_pos) newptuState.position[0] = pan_pos;
    }
 
    if (msg->axes[3] < 0) 
    { 
-	newptuState.position[1] = ptuState.position[1] - M_PI/36.0;
+	newptuState.position[1] = ptuState.position[1] + M_PI/36.0;
+	if (newptuState.position[1] > tilt_pos) newptuState.position[1] = tilt_pos;
    } else if (msg->axes[3]>0)
    {
-	newptuState.position[1] = ptuState.position[1] + M_PI/36.0;
+	newptuState.position[1] = ptuState.position[1] - M_PI/36.0;
+	if (newptuState.position[1] < tilt_neg) newptuState.position[1] = tilt_neg;
    }
+
 
    pub_ptu_cmd.publish(newptuState);
 
@@ -59,7 +69,7 @@ void controlCallback(const sensor_msgs::Joy::ConstPtr& msg)
 void ptuCallback(const sensor_msgs::JointState::ConstPtr& msg)
 {
 	ptuState = *msg;
-	std::cout<<"Ptu state "<<ptuState.position[0]<<"  "<<ptuState.position[1]<<std::endl;
+	//std::cout<<"Ptu state "<<ptuState.position[0]<<"  "<<ptuState.position[1]<<std::endl;
 }
 
 int main(int argc, char **argv)
