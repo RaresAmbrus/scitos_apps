@@ -83,13 +83,13 @@ void CChargingActions::injectPosition()
 
 void CChargingActions::lightsOff()
 {
-	light.set(false);
+//	light.set(false);
 }
 
 
 void CChargingActions::lightsOn()
 {
-	light.set(true);
+//	light.set(true);
 }
 
 void CChargingActions::movePtu(int pan,int tilt)
